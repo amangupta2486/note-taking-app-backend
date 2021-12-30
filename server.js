@@ -28,7 +28,7 @@ app.get('/',async (req,res)=>{
      return res.json(notesList);
 })
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4300;
 
 app.listen(port,()=>{
     console.log(`Connected to port ${port}`);

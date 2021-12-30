@@ -21,7 +21,7 @@ const connectToDatabase = async () => {
     //const MongoURI = process.env.MONGO_URI;
     //console.log(MongoURI);
     
-    mongoose.connect("mongodb+srv://user2:12345@cluster0.tfadt.mongodb.net/My_Notes", ()=>{
+    mongoose.connect("mongodb+srv://aman1:aman@cluster0.tfadt.mongodb.net/My_Notes", ()=>{
 
     console.log('Connected to database');
     });
