@@ -1,36 +1,31 @@
-const express =require('express');
-const mongoose = require('mongoose');
-const cors =require('cors');
-const connect = require('./connectToDatabase');
-const User = require('./schema');
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, './.env') });
+const express = require("express");
+const cors = require("cors");
+const connect = require("./connectMongo");
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-app.post('/', async (req, res) => {
-    const reqBody = req.body;
-    console.log(reqBody.notes);
+const User = require("./schema");
 
-    const newNotes = new User({
-        notes: reqBody.notes,
-        author: reqBody.author,
-    });
-
-    await newNotes.save();
-    return res.json(true);
+app.post("/", async (req, res) => {
+  const requestBody = req.body;
+  const newNotes = new User({
+    author: requestBody.author,
+    notes: requestBody.notes,
+  });
+  await newNotes.save();
+  return res.json(true);
 });
 
-app.get('/',async (req,res)=>{
-     const notesList = await User.find();
-     return res.json(notesList);
-})
+app.get("/", async (req, res) => {
+  const noteList = await User.find();
+  return res.json(noteList);
+});
 
-const port = process.env.PORT || 4300;
+const port = process.env.PORT || 4600;
 
-app.listen(port,()=>{
-    console.log(`Connected to port ${port}`);
-    connect();
+app.listen(port, () => {
+  console.log(`Server started at port: ${port}`);
+  connect();
 });
